@@ -22,7 +22,12 @@ public class EmPubLiteActivity extends Activity {
     private static final String PREF_SAVE_LAST_POSITION = "saveLastPosition";
     private static final String PREF_KEEP_SCREEN_ON = "keepScreenOn";
 
-    private ViewPager pager;
+    private ViewPager pager;/**
+ * An {@link IntentService} subclass for handling asynchronous task requests in
+ * a service on a separate handler thread.
+ * <p>
+ * TODO: Customize class - update intent actions and extra parameters.
+ */
     private ContentsAdapter adapter;
     private ModelFragment modelFragment = null;
 
@@ -72,6 +77,10 @@ public class EmPubLiteActivity extends Activity {
             case R.id.notes:
                 startActivity(new Intent(this, NoteActivity.class)
                     .putExtra(NoteActivity.EXTRA_POSITION, pager.getCurrentItem()));
+                return true;
+
+            case R.id.update:
+                startService(new Intent(this, DownloadCheckService.class));
                 return true;
         }
 
